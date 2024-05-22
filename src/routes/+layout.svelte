@@ -2,8 +2,7 @@
     export let data;
     import "../app.pcss";
     import { goto, invalidateAll } from "$app/navigation";
-    import { Auth } from '@supabase/auth-ui-svelte';
-    import { ThemeSupa } from '@supabase/auth-ui-shared';
+
 
     let { supabase, session } = data
     $: ({ supabase, session } = data)
@@ -30,7 +29,9 @@
         <div>
             <a href="/" class="btn btn-ghost text-xl">Primaram</a>
             {#if session !== null}
-                <a href="/{session.user.email}" class="btn btn-ghost">My Page</a>
+            <!-- <a href="/{session.user.email}" class="btn btn-ghost">My Page</a> -->
+            <a href="/viewAlerts" class="btn btn-ghost">Alerts</a>
+            <a href="/form" class="btn btn-ghost">Create Alert</a>
             {/if}
         </div>
         <!--right side of navbar-->
