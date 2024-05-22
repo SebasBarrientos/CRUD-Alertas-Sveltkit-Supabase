@@ -13,7 +13,5 @@
 </main>
 
 <style>
-    .alert {
-        display: flex;
-    }
+  
 </style>
