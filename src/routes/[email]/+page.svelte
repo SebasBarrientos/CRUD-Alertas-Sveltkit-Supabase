@@ -1,58 +1,45 @@
-<!-- <script lang="ts" context="module">
-    export let data;
-    let { supabase, session } = data;
-    export async function load() {
-        const { data:dataSensor } = await supabase.from("alerts").select("*");
-        {
-            console.log(data);
-        }
-        return {
-            props:{
-                dataSensor
-            }
-        };
-    }
-
-</script> -->
-
 <script lang="ts">
     export let data;
-    let { supabase, session } = data;
+    let { supabase, } = data;
     $: ({ supabase, session } = data);
     import { page } from "$app/stores";
 
     $: email = $page.params.email;
-    // export let dataSensor;
-    // async function savealerts() {
-    //     const alertsDataSearch = await supabase.from("alerts").select("*");
-    //     const alertsData = alertsDataSearch;
-    //     return alertsData.data[0].sensor;
 
-    // }
-    // $: sensorData = await savealerts()
-    // console.log(savealerts());
-    $: alertsFetched = "cargando"
+    $: alertsFetched = "cargando";
     export async function load() {
-        const { data:alerts } = await supabase.from("alerts").select("*");
-        console.log(alerts[0]);
-        alertsFetched = alerts[0].sensor
-       
-        // return {
-        //     alerts: alerts ?? [],
-        // };
+        const { data: alerts } = await supabase.from("alerts").select("*");
+        console.log(alerts);
+        alertsFetched = alerts;
+        console.log(alertsFetched);
     }
-    const test = load()
-    console.log(alertsFetched);
-    
+    const test = load();
 </script>
 
 <div class="hero min-h-screen bg-base-300">
     <div class="hero-content">
         <div class="max-w-md text-center">
-            <h1 class="text-white font-bold text-4xl">{email}</h1>
-            <ul>
-                <li>{alertsFetched}</li>
-            </ul>
+            <h1 class="text-white font-bold text-4xl">Alertas:</h1>
+            <div>
+                
+                {#each alertsFetched as alert}
+                <ul class="alert">
+                    <li>{alert.tipo_alerta}</li>
+                    <li>{alert.subtipo_alerta}</li>
+                    <li>{alert.desviacion_maxima}</li>
+                    <li>{alert.estado}</li>
+                </ul>
+                <!-- <li>{alertsFetched||"cargando"}</li> -->
+                {/each}
+            </div>
         </div>
     </div>
 </div>
+
+
+<style>
+.alert {
+    display: flex;
+
+}
+</style>
