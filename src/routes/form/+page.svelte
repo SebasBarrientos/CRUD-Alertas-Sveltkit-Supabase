@@ -69,15 +69,13 @@ $: console.log(tipo_alerta);
       </div>
     </div>
   </section> -->
-  <section class="hero min-h-screen bg-cover bg-center bg-base-300">
-    <div class="container mx-auto px-4">
+<section class="hero min-h-screen bg-cover bg-center bg-base-300">
+
       <div class="hero-content flex flex-col items-center justify-center h-full">
           <h1 class="text-4xl font-bold mb-2 mt-20">Formulario de Alerta:</h1>
           <form novalidate class="w-full max-w-md">
-            <div class="flex justify-content "></div>
             <h3 class="text-2xl">Tipo de Alerta</h3>
             <div class="flex flex-row">
-                
                 <div class="form-control mb-4 basis-1/2">
                     <label class="label" for="tipo_alerta">Tipo </label>
                     <select id="tipo_alerta" name="tipo_alerta" class="select select-bordered" bind:value={tipo_alerta} required>
@@ -85,7 +83,6 @@ $: console.log(tipo_alerta);
                         <option value="Conductividad 2">Conductividad 2</option>
                     </select>
                 </div>
-                
                 <div class="form-control mb-4 basis-1/2">
                     <label class="label" for="subtipo_alerta">Subtipo de Alerta</label>
                     <select id="subtipo_alerta" name="subtipo_alerta" class="select select-bordered" bind:value={subtipo_alerta} required>
@@ -130,7 +127,6 @@ $: console.log(tipo_alerta);
           <button class="btn btn-primary" on:click={saveAlert}>Guardar</button>
         </form>
       </div>
-    </div>
   </section>
 <style>
 
