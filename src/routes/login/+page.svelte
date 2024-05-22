@@ -17,7 +17,7 @@
 <div class="hero min-h-screen bg-base-300">
     <div class="hero-content w-[800px]">
         <div class="flex flex-col">
-            <p>Create an account or login below!</p>
+            <p>Login below!</p>
             <!-- Supabase Auth UI -->
             <Auth 
                 supabaseClient={supabase}
