@@ -7,7 +7,6 @@
     let { supabase, session } = data
     $: ({ supabase, session } = data)
 
-    // session is null, if session is null we have no user. if its not null, we have a user
 
     supabase.auth.onAuthStateChange(async (event, session) => {
         if(event === "SIGNED_IN") {
@@ -29,7 +28,6 @@
         <div>
             <a href="/" class="btn btn-ghost text-xl">Primaram</a>
             {#if session !== null}
-            <!-- <a href="/{session.user.email}" class="btn btn-ghost">My Page</a> -->
             <a href="/viewAlerts" class="btn btn-ghost">Alerts</a>
             <a href="/form" class="btn btn-ghost">Create Alert</a>
             {/if}

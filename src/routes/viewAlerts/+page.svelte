@@ -11,7 +11,7 @@
         console.log(alertsFetched);
     }
 
-    const test = load();
+  load();
     let showUpdate = false;
     let idAlertUpdate;
 
@@ -75,8 +75,7 @@ $: console.log (showUpdate)
                                 <div class="flex flex-row">
                                   <div class="form-control mb-4 basis-1/2">
                                     <label class="label" for="tipo_alerta">Tipo </label>
-                                    <select id="tipo_alerta" name="tipo_alerta" class="select select-bordered" bind:value={tipo_alerta}
-                                      required>
+                                    <select id="tipo_alerta" name="tipo_alerta" class="select select-bordered" bind:value={tipo_alerta} required>
                                       <option value="Conductividad">Conductividad</option>
                                       <option value="Conductividad 2">Conductividad 2</option>
                                     </select>

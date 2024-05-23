@@ -36,48 +36,7 @@
   }
   $: console.log(tipo_alerta);
 
-  // y luego usar bind con los inputs y guardar
 </script>
-
-<!-- 
-<section class="hero min-h-screen bg-cover bg-center bg-base-300">
-    <div class="container mx-auto px-4">
-      <div class="hero-content flex flex-col items-center justify-center h-full">
-        <h1 class="text-4xl font-bold mb-8">Formulario:</h1>
-        <form novalidate class="w-full max-w-md">
-          <div class="form-control mb-4">
-            <label class="label" for="tipo_alerta">Tipo de Alerta</label>
-            <input type="text" id="tipo_alerta" name="tipo_alerta" class="input input-bordered" bind:value={tipo_alerta} required />
-          </div>
-          <div class="form-control mb-4">
-            <label class="label" for="subtipo_alerta">Subtipo de Alerta</label>
-            <input type="text" id="subtipo_alerta" name="subtipo_alerta" class="input input-bordered" bind:value={subtipo_alerta} required />
-          </div>
-          <div class="form-control mb-4">
-            <label class="label" for="sensor">Sensor</label>
-            <input type="text" id="sensor" name="sensor" class="input input-bordered" bind:value={sensor}  />
-          </div>
-          <div class="form-control mb-4">
-            <label class="label" for="sensor_entrada">Sensor de Entrada</label>
-            <input type="text" id="sensor_entrada" name="sensor_entrada" class="input input-bordered" bind:value={sensor_entrada}  />
-          </div>
-          <div class="form-control mb-4">
-            <label class="label" for="sensor_salida">Sensor de Salida</label>
-            <input type="text" id="sensor_salida" name="sensor_salida" class="input input-bordered" bind:value={sensor_salida}  />
-          </div>
-          <div class="form-control mb-4">
-            <label class="label" for="desviacion_maxima">Desviación Máxima</label>
-            <input type="text" id="desviacion_maxima" name="desviacion_maxima" class="input input-bordered" bind:value={desviacion_maxima}  />
-          </div>
-          <div class="form-control mb-4">
-            <label class="label" for="tiempo_en_ese_estado">Tiempo en ese Estado</label>
-            <input type="text" id="tiempo_en_ese_estado" name="tiempo_en_ese_estado" class="input input-bordered" bind:value={tiempo_en_ese_estado}  />
-          </div>
-          <button class="btn btn-primary" on:click={saveAlert}>Enviar Formulario</button>
-        </form>
-      </div>
-    </div>
-  </section> -->
 <section class="min-h-screen bg-cover bg-center bg-base-300 mt-20">
   <div class="flex flex-col items-center justify-center h-full">
     <form novalidate class="w-full max-w-md">
