@@ -47,6 +47,7 @@
             required>
             <option value="Conductividad">Conductividad</option>
             <option value="Conductividad 2">Conductividad 2</option>
+            <option value="pH">pH</option>
           </select>
         </div>
         <div class="form-control mb-4 basis-1/2">
@@ -54,6 +55,8 @@
           <select id="subtipo_alerta" name="subtipo_alerta" class="select select-bordered"bind:value={subtipo_alerta} required>
             <option value="Desviacion Max">Desviacion Max</option>
             <option value="Desviacion Min">Desviacion Min</option>
+            <option value="Valor Min">Valor Max</option>
+            <option value="Valor Min">Valor Min</option>
           </select>
         </div>
       </div>
