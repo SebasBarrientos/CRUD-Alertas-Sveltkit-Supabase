@@ -2,7 +2,7 @@
     
   export let data;
   let { supabase } = data;
-  let alertsFetched: any[] | null = null;
+  let alertsFetched: any[] | null = [];
   let loading: boolean = true;
   $: ({ supabase, session } = data);
 
