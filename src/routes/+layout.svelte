@@ -6,7 +6,7 @@
     let { supabase, session } = data
     $: ({ supabase, session } = data)
 
-    supabase.auth.onAuthStateChange(async (event, session) => {
+    supabase.auth.onAuthStateChange(async (event) => {
         if(event === "SIGNED_IN") {
             invalidateAll();
         }
