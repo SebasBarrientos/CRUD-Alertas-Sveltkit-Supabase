@@ -2,22 +2,25 @@
     
     export let data;
     let { supabase } = data;
+    let alertsFetched: any[] | null = null;
+  let loading: boolean = true;
     $: ({ supabase, session } = data);
     
     export async function load() {
-        const { data: alerts } = await supabase.from("alerts").select("*");
-        console.log(alerts);
-        alertsFetched = alerts;
-        console.log(alertsFetched);
+        const { data: alerts,error  } = await supabase.from("alerts").select("*");
+        loading= false;
+        alertsFetched= alerts;
+        if (error) {
+      console.error('Error fetching alerts:', error);
+      alertsFetched = null;
+    } else {
+      alertsFetched = alerts;
+    }
     }
 
   load();
     let showUpdate = false;
-    let idAlertUpdate;
-
-
-
-$: console.log (showUpdate)
+    let idAlertUpdate:number;
     let tipo_alerta = "";
     let subtipo_alerta = "";
     let sensor = "";
@@ -26,10 +29,8 @@ $: console.log (showUpdate)
     let desviacion_maxima = 0;
     let tiempo_en_ese_estado = 0;
 
-    const update = (id) =>{
+    const update = (id:number) =>{
         showUpdate = true
-        console.log(id);
-        
         idAlertUpdate = id
     }
     const reset = () =>{
@@ -43,28 +44,24 @@ $: console.log (showUpdate)
   }
 
   async function updateAlert(id) {
-    const { data, error } = await supabase.from("alerts").update({
-      tipo_alerta,
-      subtipo_alerta,
-      sensor,
-      sensor_entrada,
-      sensor_salida,
-      desviacion_maxima,
-      tiempo_en_ese_estado,
-    }).eq("id",id)
-    load()
-    showUpdate=false;}
+    await supabase.from("alerts").update({
+        tipo_alerta,
+        subtipo_alerta,
+        sensor,
+        sensor_entrada,
+        sensor_salida,
+        desviacion_maxima,
+        tiempo_en_ese_estado,
+      }).eq("id",id)
+      load()
+      reset()
+      showUpdate=false;
+  }
 
-
-    $: alertsFetched = "cargando";
-
-
-
- 
 </script>
 <main>
     <div class="min-h-screen bg-base-200">
-      <div class="container mx-auto px-4 mt-20">
+      <div class="container mx-auto px-4 ">
         <div class="flex flex-col lg:flex-row justify-center items-center">
                     <div>
                         {#if showUpdate}
@@ -127,10 +124,14 @@ $: console.log (showUpdate)
                               </form>
                             </div>
                         {:else}
-
+                        {#if loading}
+                        <div class="flex justify-center items-center h-screen">
+                          <div class="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary"></div>
+                        </div>
+                        {:else}
                         <div class="card mt-8 shadow-md rounded-lg">
-                            <div class="card-header bg-base-300 font-bold">Alertas</div>
-                            <div class="card-body">
+                            <div class="card-header bg-base-300 font-bold rounded-t p-3">Alertas</div>
+                            <div class="card-body p-2">
                               <table class="table table-zebra w-full">
                                 <thead>
                                   <tr>
@@ -157,9 +158,9 @@ $: console.log (showUpdate)
                             </table>
                         </div>
                     </div>
+                    {/if}
                         {/if}
                    
-                            
                       </div>
                 </div>
             </div>

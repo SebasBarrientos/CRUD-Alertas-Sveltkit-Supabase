@@ -1,13 +1,9 @@
 <script>
-
     export let data;
-import "../app.pcss";
+    import "../app.pcss";
 
-
-
-let {  session } = data
-$: ({  session } = data)
-
+    let { session } = data;
+    $: ({ session } = data);
 </script>
 
 <div class="hero min-h-screen bg-base-300">
@@ -18,7 +14,7 @@ $: ({  session } = data)
                 <p class="py-6">Login to create alerts!</p>
                 <a href="/login" class="btn btn-primary">Login</a>
             {:else}
-            <span class=" text-lg ml-2">{session.user.email}</span>
+                <span class=" text-lg ml-2">{session.user.email}</span>
             {/if}
         </div>
     </div>

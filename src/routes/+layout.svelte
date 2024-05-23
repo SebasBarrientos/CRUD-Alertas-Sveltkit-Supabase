@@ -3,10 +3,8 @@
     import "../app.pcss";
     import { goto, invalidateAll } from "$app/navigation";
 
-
     let { supabase, session } = data
     $: ({ supabase, session } = data)
-
 
     supabase.auth.onAuthStateChange(async (event, session) => {
         if(event === "SIGNED_IN") {
@@ -22,14 +20,14 @@
 </script>
 
 <!-- Navbar -->
-<div class="bg-base-100 justify-between fixed top-0 left-0 right-0">
+<div class="bg-base-100 justify-between top-0 left-0 right-0">
     <div class="navbar max-w-3xl mx-auto justify-between">
         <!--left side of navbar-->
         <div>
             <a href="/" class="btn btn-ghost text-xl">Primaram</a>
             {#if session !== null}
-            <a href="/viewAlerts" class="btn btn-ghost">Alerts</a>
-            <a href="/form" class="btn btn-ghost">Create Alert</a>
+            <a href="/viewAlerts" class="btn btn-ghost">Alertas</a>
+            <a href="/form" class="btn btn-ghost">Crear Alerta</a>
             {/if}
         </div>
         <!--right side of navbar-->
@@ -40,8 +38,6 @@
                 <span class="text-white text-lg ml-2">{session.user.email}</span>
                 <button class="ml-2" on:click={async () => { await supabase.auth.signOut()}}>Logout</button>
             {/if}
-            
-            
         </div>
     </div>
 </div>

@@ -23,7 +23,7 @@
     tiempo_en_ese_estado = 0;
   }
   async function saveAlert() {
-    const { data, error } = await supabase.from("alerts").insert({
+    await supabase.from("alerts").insert({
       tipo_alerta,
       subtipo_alerta,
       sensor,
@@ -34,10 +34,9 @@
     });
     goto("/viewAlerts");
   }
-  $: console.log(tipo_alerta);
 
 </script>
-<section class="min-h-screen bg-cover bg-center bg-base-300 mt-20">
+<section class="min-h-screen bg-cover bg-center bg-base-300 ">
   <div class="flex flex-col items-center justify-center h-full">
     <form novalidate class="w-full max-w-md">
       <h3 class="text-2xl font-bold mt-4">Tipo de Alerta</h3>
