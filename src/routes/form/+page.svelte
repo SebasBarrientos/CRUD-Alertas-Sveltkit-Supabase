@@ -12,7 +12,8 @@
   let sensor_salida = "";
   let desviacion_maxima = 0;
   let tiempo_en_ese_estado = 0;
-
+ $: console.log(subtipo_alerta);
+ 
    const reset = () =>{
     tipo_alerta = "";
     subtipo_alerta = "";
@@ -55,22 +56,12 @@
           <select id="subtipo_alerta" name="subtipo_alerta" class="select select-bordered"bind:value={subtipo_alerta} required>
             <option value="Desviacion Max">Desviacion Max</option>
             <option value="Desviacion Min">Desviacion Min</option>
-            <option value="Valor Min">Valor Max</option>
+            <option value="Valor Max">Valor Max</option>
             <option value="Valor Min">Valor Min</option>
           </select>
         </div>
       </div>
-      
-      <div class="form-control mb-4">
-        <label class="label" for="sensor">Sensor</label>
-        <select id="sensor" name="sensor" class="select select-bordered" bind:value={sensor} >
-          <option value=""></option>
-          <option value="Sensor 1">Sensor 1</option>
-          <option value="Sensor 2">Sensor 2</option>
-          <option value="Sensor 3">Sensor 3</option>
-          <option value="Sensor 4">Sensor 4</option>
-        </select>
-
+        {#if subtipo_alerta == "Valor Max" || subtipo_alerta == "Valor Min"} // DESPUES DARLE DINAMISMO CON {} A LOS VALORES DEL GET
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="form-control mb-4">
             <label class="label" for="sensor_entrada">Sensor de Entrada</label>
@@ -81,7 +72,22 @@
             <input type="text" id="sensor_salida" name="sensor_salida" class="input input-bordered" bind:value={sensor_salida}/>  
           </div>
         </div>
-
+        
+        {:else}
+      <div class="form-control mb-4">
+        <label class="label" for="sensor">Sensor</label>
+        <select id="sensor" name="sensor" class="select select-bordered" bind:value={sensor} >
+          <option value=""></option>
+          <option value="Sensor 1">Sensor 1</option>
+          <option value="Sensor 2">Sensor 2</option>
+          <option value="Sensor 3">Sensor 3</option>
+          <option value="Sensor 4">Sensor 4</option>
+        </select>
+        
+      </div>
+      {/if}
+      <div>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="form-control mb-4">
             <label class="label" for="desviacion_maxima" >Desviación Máxima</label >   
