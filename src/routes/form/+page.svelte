@@ -23,6 +23,7 @@
  $: console.log(tiempo_en_ese_estado);
 
  async function  optionsEnums () {
+    let enumTypes = await supabase.rpc('enum_range', { type: 'types' })
     let enumSub_type = await supabase.rpc('enum_range', { type: 'sub_types' })
     let enumSensors = await supabase.rpc('enum_range', { type: 'sensors' })
     enums = {
