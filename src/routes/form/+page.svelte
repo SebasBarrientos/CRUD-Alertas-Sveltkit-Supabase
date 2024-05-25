@@ -4,6 +4,7 @@
   export let data;
   let { supabase } = data;
   $: ({ supabase, session } = data);
+  let loading: boolean = true;
 
   let tipo = "";
   let sub_tipo = "";
@@ -12,6 +13,7 @@
   let sensor_salida:any = null;
   let desviacion_maxima = 0;
   let tiempo_en_ese_estado = 0;
+  let enums = {};
  $: console.log(tipo);
  $: console.log(sub_tipo);
  $: console.log(sensor);
@@ -21,13 +23,19 @@
  $: console.log(tiempo_en_ese_estado);
 
  async function  optionsenums () {
-// Vincular los valores al desplegable y hacer lo mismo en vista de alerts---- Guardar todo en un solo objeto para utilizarlo en ambos codigos
-    let tps = await supabase.rpc('enum_range', { type: 'types' })
-    let stps = await supabase.rpc('enum_range', { type: 'sub_types' })
-    let sensors = await supabase.rpc('enum_range', { type: 'sensors' })
-    console.log(tps.data);
-    console.log(stps.data);
-    console.log(sensors.data);
+// Vincular los valores al desplegable y hacer lo mismo en vista de alerts---- Guardar todo en un solo objeto para utilizarlo en ambos codigos-- Arreglar el put! no funciona
+    let enumTypes = await supabase.rpc('enum_range', { type: 'types' })
+    let enumSub_type = await supabase.rpc('enum_range', { type: 'sub_types' })
+    let enumSensors = await supabase.rpc('enum_range', { type: 'sensors' })
+    enums = {
+      type: enumTypes.data,
+      sub_type: enumSub_type.data,
+      sensors: enumSensors.data
+    }
+    loading= false;
+    
+    console.log(enums);
+
   }
    const reset = () =>{
     tipo = "";
@@ -57,6 +65,11 @@
 </script>
 <section class="min-h-screen bg-cover bg-center bg-base-300 ">
   <div class="flex flex-col items-center justify-center h-full">
+    {#if loading}
+    <div class="flex justify-center items-center h-screen">
+      <div class="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary"></div>
+    </div>
+    {:else}
     <form novalidate class="w-full max-w-md">
       <h3 class="text-2xl font-bold mt-4">Tipo de Alerta</h3>
       <div class="flex flex-row">
@@ -64,18 +77,19 @@
           <label class="label" for="tipo">Tipo </label>
           <select id="tipo" name="tipo" class="select select-bordered" bind:value={tipo}
             required>
-            <option value="Conductividad">Conductividad</option>
-            <option value="Conductividad 2">Conductividad 2</option>
-            <option value="pH">pH</option>
+            {#each enums.type as type }
+              
+            <option value="{type}">{type}</option>
+            {/each}
           </select>
         </div>
         <div class="form-control mb-4 basis-1/2">
           <label class="label" for="sub_tipo">Sub_tipo de Alerta</label>
           <select id="sub_tipo" name="sub_tipo" class="select select-bordered"bind:value={sub_tipo} required>
-            <option value="Desviacion Max">Desviacion Max</option>
-            <option value="Desviacion Min">Desviacion Min</option>
-            <option value="Valor Max">Valor Max</option>
-            <option value="Valor Min">Valor Min</option>
+            {#each enums.sub_type as sub_type }
+              
+            <option value="{sub_type}">{sub_type}</option>
+            {/each}
           </select>
         </div>
       </div>
@@ -84,23 +98,28 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="form-control mb-4">
             <label class="label" for="sensor_entrada">Sensor de Entrada</label>
-            <input  type="text" id="sensor_entrada" name="sensor_entrada" class="input input-bordered" bind:value={sensor_entrada} />
+            <select id="sensor_entrada" name="sensor_entrada" class="select select-bordered" bind:value={sensor_entrada} > 
+              {#each enums.sensors as sensor}
+              <option value="{sensor}">{sensor}</option>
+            {/each}
+            </select>            
           </div>
           <div class="form-control mb-4">
             <label class="label" for="sensor_salida">Sensor de Salida</label>
-            <input type="text" id="sensor_salida" name="sensor_salida" class="input input-bordered" bind:value={sensor_salida}/>  
+            <select id="sensor_salida" name="sensor_salida" class="select select-bordered" bind:value={sensor_salida} > 
+              {#each enums.sensors as sensor}
+              <option value="{sensor}">{sensor}</option>
+            {/each}
+            </select>            
           </div>
-        </div>
-        
+        </div>        
         {:else}
       <div class="form-control mb-4">
         <label class="label" for="sensor">Sensor</label>
         <select id="sensor" name="sensor" class="select select-bordered" bind:value={sensor} >
-          <option value=null></option>
-          <option value="Sensor 1">Sensor 1</option>
-          <option value="Sensor 2">Sensor 2</option>
-          <option value="Sensor 3">Sensor 3</option>
-          <option value="Sensor 4">Sensor 4</option>
+          {#each enums.sensors as sensor }
+            <option value="{sensor}">{sensor}</option>
+          {/each}
         </select>
         
       </div>
@@ -122,6 +141,7 @@
         <button class="btn m-2" on:click={reset}>Resetear</button>
       </div>
     </form>
+    {/if}
   </div>
 </section>
 
