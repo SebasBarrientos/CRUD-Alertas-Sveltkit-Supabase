@@ -35,7 +35,7 @@
             {#if session == null}
                 <button on:click={() => goto("/login")}>Login</button>
             {:else}
-                <span class="text-white text-lg ml-2">{session.user.email}</span>
+                <span class="text-lg ml-2">{session.user.email}</span>
                 <button class="ml-2" on:click={async () => { await supabase.auth.signOut()}}>Logout</button>
             {/if}
         </div>
