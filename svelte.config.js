@@ -6,10 +6,8 @@ export default {
 			// See below for an explanation of these options
 			routes: {
 				include: ['/*'],
-			},
-	  platformProxy: {
-		persist: './your-custom-path'
-	  }
+			}
+	 
 		})
 	}
 };
