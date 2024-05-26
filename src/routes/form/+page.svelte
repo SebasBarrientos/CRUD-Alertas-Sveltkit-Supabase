@@ -58,8 +58,8 @@
     })
     if (error) {
         console.error('Error fetching alerts:', error);;
-    goto("/viewAlerts");
-  }
+      }
+      goto("/viewAlerts");
   }
 </script>
 <section class="min-h-screen bg-cover bg-center">
