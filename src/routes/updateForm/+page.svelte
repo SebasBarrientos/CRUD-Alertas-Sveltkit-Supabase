@@ -6,17 +6,15 @@
     
     import { page } from '$app/stores';
     $: userId = $page?.data?.state?.userId
-    $: console.log(userId);
+    let idAlertUpdate =userId;
     
-    let idAlertUpdate: =userId;
-    
-    let tipo: string | null= null;
-    let sub_tipo: string | null= null;
-    let sensor: string | null = null;
-    let sensor_entrada: string | null = null;
-    let sensor_salida: string | null = null;
-    let desviacion_maxima: number | null = 0;
-    let tiempo_en_ese_estado: number | null = 0;
+    let tipo= null;
+    let sub_tipo= null;
+    let sensor = null;
+    let sensor_entrada = null;
+    let sensor_salida = null;
+    let desviacion_maxima = 0;
+    let tiempo_en_ese_estado = 0;
     let enums = {};
     $: loading= true
 
