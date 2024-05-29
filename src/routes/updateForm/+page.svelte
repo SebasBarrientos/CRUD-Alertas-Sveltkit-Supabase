@@ -1,6 +1,4 @@
 <script lang="ts">
-    import ViewAlerts from "../viewAlerts/+page.svelte" 
-    // export let userId:Number, data ;
     export let data;
     
     let { supabase } = data;
@@ -8,26 +6,20 @@
     
     import { page } from '$app/stores';
     $: userId = $page?.data?.state?.userId
-    let idAlertUpdate =userId;
-    $:console.log(idAlertUpdate);
+    $: console.log(userId);
     
-    let tipo= null;
-    let sub_tipo= null;
-    let sensor = null;
-    let sensor_entrada = null;
-    let sensor_salida = null;
-    let desviacion_maxima = 0;
-    let tiempo_en_ese_estado = 0;
+    let idAlertUpdate: =userId;
+    
+    let tipo: string | null= null;
+    let sub_tipo: string | null= null;
+    let sensor: string | null = null;
+    let sensor_entrada: string | null = null;
+    let sensor_salida: string | null = null;
+    let desviacion_maxima: number | null = 0;
+    let tiempo_en_ese_estado: number | null = 0;
     let enums = {};
     $: loading= true
 
-    $: console.log(tipo);
-    $: console.log(sub_tipo);
-    $: console.log(sensor);
-    $: console.log(sensor_entrada);
-    $: console.log(sensor_salida);
-    $: console.log(desviacion_maxima);
-    $: console.log(tiempo_en_ese_estado);
     async function  optionsenums () {
     let enumTypes = await supabase.rpc('enum_range', { type: 'types' })
     let enumSub_type = await supabase.rpc('enum_range', { type: 'sub_types' })
@@ -38,8 +30,6 @@
       sensors: enumSensors.data
     }
     loading= false;
-    
-    console.log(enums);
     }
     optionsenums()
     const reset = () =>{
@@ -52,7 +42,6 @@
     tiempo_en_ese_estado = 0;
   }
     async function updateAlert(idAlertUpdate) {
-        console.log(idAlertUpdate);
         
         const { data: alerts,error  } = await supabase.from("alerts").update({
             tipo,
@@ -69,8 +58,6 @@
   }
   //   reset()
 }
-    
- 
 </script>
 
 <main>

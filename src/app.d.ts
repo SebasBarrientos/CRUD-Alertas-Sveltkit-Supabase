@@ -5,12 +5,6 @@ declare global {
 			supabase: SupabaseClient
 			session:Session | null
 		 }
-	// 	 interface Platform {
-	// 		env?: {
-	// 			YOUR_KV_NAMESPACE: KVNamespace;
-				
-	// 		};
-	// }
 }
 }
 export {};

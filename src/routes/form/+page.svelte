@@ -6,21 +6,15 @@
   $: ({ supabase, session } = data);
   let loading: boolean = true;
 
-  let tipo = "";
-  let sub_tipo = "";
+  let tipo:any = "";
+  let sub_tipo:any = "";
   let sensor:any = null;
   let sensor_entrada:any = null;
   let sensor_salida:any = null;
-  let desviacion_maxima = 0;
-  let tiempo_en_ese_estado = 0;
+  let desviacion_maxima:number = 0;
+  let tiempo_en_ese_estado:number = 0;
   let enums = {};
- $: console.log(tipo);
- $: console.log(sub_tipo);
- $: console.log(sensor);
- $: console.log(sensor_entrada);
- $: console.log(sensor_salida);
- $: console.log(desviacion_maxima);
- $: console.log(tiempo_en_ese_estado);
+
 
  async function  optionsEnums () {
     let enumTypes = await supabase.rpc('enum_range', { type: 'types' })
@@ -32,8 +26,6 @@
       sensors: enumSensors.data
     }
     loading= false;
-    
-    console.log(enums);
 
   }
    const reset = () =>{
@@ -47,7 +39,7 @@
   }
   optionsEnums()
   async function saveAlert() {
-    const { data: alerts,error  } = await supabase.from("alerts").insert({
+    const { error  } = await supabase.from("alerts").insert({
       tipo,
       sub_tipo,
       sensor,
@@ -154,24 +146,3 @@
 
 <style>
 </style>
-
-
-<!-- 
-create type types as enum (
-  'Conductividad',
-  'pH',
-);
-create type sub_Types as enum (
-  'Desviacion Max',
-  'Desviacion Min',
-  'Valor Max',
-  'Valor Min',
-);
-create type sensors as enum (
-  'Sensor 1',
-  'Sensor 2',
-  'Sensor 3',
-  'Sensor 4',
-  'Sensor 5',
-  'Sensor 6',
-); -->

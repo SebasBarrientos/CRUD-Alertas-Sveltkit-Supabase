@@ -2,7 +2,7 @@
     
   export let data;
   let { supabase } = data;
-  let alertsFetched: any[] | null = [];
+  let alertsFetched= [];
   let loading: boolean = true;
   $: ({ supabase, session } = data);
   let enums = {};
@@ -32,16 +32,15 @@
   load();
   let showUpdate = false;
   let idAlertUpdate;
-  let tipo= null;
-  let sub_tipo= null;
-  let sensor = null;
-  let sensor_entrada = null;
-  let sensor_salida = null;
-  let desviacion_maxima = 0;
-  let tiempo_en_ese_estado = 0;
+  let tipo: string | null= null;
+  let sub_tipo: string | null= null;
+  let sensor: string | null = null;
+  let sensor_entrada: string | null = null;
+  let sensor_salida: string | null = null;
+  let desviacion_maxima: number | null = 0;
+  let tiempo_en_ese_estado: number | null = 0;
 
   const update = (id) =>{
-    console.log(id);
 
         showUpdate = true
         idAlertUpdate = id
@@ -57,8 +56,6 @@
   }
 
   async function updateAlert(id) {
-    console.log(id);
-    
     await supabase.from("alerts").update({
         tipo,
         sub_tipo,

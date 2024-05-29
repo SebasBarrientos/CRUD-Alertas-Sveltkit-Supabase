@@ -16,7 +16,7 @@
             invalidateAll();
         }
     })
-
+    
 </script>
 
 <!-- Navbar -->
@@ -28,6 +28,7 @@
             {#if session !== null}
             <a href="/viewAlerts" class="btn btn-ghost">Alertas</a>
             <a href="/form" class="btn btn-ghost">Crear Alerta</a>
+            <a href="https://172.31.188.119:8443/#/" class="btn btn-ghost ml-2">Guacamole</a>
             {/if}
         </div>
         <!--right side of navbar-->
